@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style type="text/css">
+        @import url("../static/style.css");
+    </style>
+</head>
+<body>
+    <h1>Chatbot</h1>
+    <div id="box">
+        <div id="chatbox">
+            <!-- 채팅 내용 추가 -->
+        </div>
+        <div style="height: 60px; margin-top: 10px">
+            <input type="text" id="question" placeholder="질문을 작성해주세요">
+            <button id="submit" type="button" class="btn btn-outline-dark btn-lg">전송</button>
+        </div>
+    </div>
+
+    <script>
+        function appendMessage(role, content) {
+            $("#chatbox").append(
+                $("<div>").addClass(role).text(content)
+            );
+        }
+        // submit 라는 id 를 가진 버튼 클릭 시 실행
+        $("#submit").on("click", function () {
+            
+            // question 이라는 id를 가진 입력 상자의 값을 가져옴
+            var question = $("#question").val();
+            
+            // 사용자의 질문을 메시지로 화면에 추가
+            appendMessage("user", question);
+
+            // 입력 상자를 비움
+            $("#question").val("");
+
+            // jQuery의 ajax 사용 하여 HTTP 요청: 비동기적인 통신 방법
+            $.ajax({  
+                type: "POST", // 전송방식 POST
+                url: "/ask",  // 서버에 요청을 보낼 주소
+                data: { question: question }, // 서버에 전달할 데이터, 객체 형태로 question
+                
+                success: function (response) {  //요청 성공시 수행할 핸들러
+                    // 서버에서 받아올 assistant 메세지 화면에 추가
+                    // 응답 데이터는 JSON 포맷, response.answer 로 답변 받아오기
+                    appendMessage("assistant", response.answer);
+                } 
+                // error: 실패시 수행할 핸들러, 향후 추가가능
+            });
+        });
+    </script>
+</body>
+</html>

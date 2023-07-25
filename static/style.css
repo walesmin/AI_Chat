@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 10px
+}
+
+#chatbox {
+    width: 90%; 
+    height: 40em;
+    padding: 10px;
+    margin:auto;
+    overflow-y: auto;
+}
+
+.user,
+.assistant {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    max-width: 75%;
+    clear: both;
+}
+
+.user {
+    background-color: #e6e6e6;
+    float: right;
+}
+
+.assistant {
+    background-color: #80ffaa;
+    float: left;
+}
+
+input[type="text"] {
+    width: 70%;
+    height: 46px;
+    margin-right: 10px;
+    padding:0;
+}
+
+.user {
+  text-align: right ;
+  display: block;
+  background-color: #e3f2fd;
+}
+
+.assistant {
+  text-align: left;
+  display: block;
+  background-color: #fff8e1;
+}
+
+#box{
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: 0 25px 0 25px;
+}
